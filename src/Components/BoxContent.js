@@ -6,7 +6,7 @@ const BoxContent = ({ ...props }) => {
         return (
             <>
                 {/* CONTENT */}
-                <div key={index} className={`p-2 bg-white m-1`} style={{ flex:`1 1 150px`, height:'clamp(30px, 150px, 5000px)' }}>
+                <div key={index} className={`p-2 bg-white`} style={{ flex:`1 1 150px`, height:'clamp(30px, 150px, 5000px)' }}>
                     {index}
                 </div>
             </>

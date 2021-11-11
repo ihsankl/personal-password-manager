@@ -24,7 +24,7 @@ const App = () => {
       <div className="pt-16 pr-4 pl-4">
 
         {/* BODY SECTION */}
-        <div className="flex flex-wrap flex-1 mt-1">
+        <div className="flex flex-wrap flex-1 mt-1" style={{ gap: '15px' }}>
           <BoxContent data={data} />
         </div>
 
