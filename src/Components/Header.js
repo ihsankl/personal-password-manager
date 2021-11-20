@@ -11,12 +11,12 @@ const Header = ({ setIsSideBarOpen, isSideBarOpen, ...props }) => {
             </button>
             {/* SEARCH BAR */}
             <div className="relative flex-1">
-                <input type="search" name="" className="w-full rounded-md pl-8 p-1" id="" placeholder="Search . . ." />
+                <input type="search" name="" className="w-full rounded-md pl-8 p-2" id="" placeholder="Search . . ." />
                 <AiOutlineSearch className="text-2xl absolute top-1.5 left-1" />
             </div>
             {/* PROFILE IMAGE */}
-            <button className="flex justify-center items-center rounded-full bg-blue-300 w-8 h-8 ml-5 p-1">
-                <AiOutlineUser className="text-white text-xl" />
+            <button className="flex justify-center items-center rounded-full bg-blue-300 w-10 h-10 ml-5 p-1">
+                <AiOutlineUser className="text-white text-3xl" />
             </button>
 
         </div>
