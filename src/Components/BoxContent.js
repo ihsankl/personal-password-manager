@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react'
 import styled from "styled-components";
 
@@ -10,19 +11,21 @@ const Cards = styled.div`
     padding: .5rem;
 `
 
-const BoxContent = ({ ...props }) => {
-    const { data } = props
+const BoxContent = observer(({ store, ...props }) => {
+
     return (
-        <div className="flex flex-wrap flex-1 mt-1 gap-2">
-            {data.map((item, index) => {
+        <div className="flex flex-wrap flex-1 my-2 gap-2">
+            {store.passwords.map((item, index) => {
                 return (
-                    <Cards key={index}>
+                    <Cards onClick={() => store.deletePassword(index)} key={index}>
+                        {item?.password} <br />
+                        {item?.username} <br />
                         {index}
                     </Cards>
                 )
             })}
         </div>
     )
-}
+})
 
 export default BoxContent

@@ -1,20 +1,14 @@
 import React from 'react'
 import { AiOutlineSetting, AiFillCaretLeft, AiOutlineLock, AiFillFile } from "react-icons/ai";
-import styled from "styled-components";
 import { useSpring, animated } from 'react-spring'
 import ScreenOverlay from './ScreenOverlay';
+import { SpacerWithLine } from '../Layout';
 
 const Sidebar = ({ setIsSideBarOpen, isSideBarOpen, ...props }) => {
 
     const translate = useSpring({
         transform: isSideBarOpen ? 'translateX(0%)' : 'translateX(-100%)',
     })
-
-    const SpacerWithLine = styled.div`
-        margin: .5rem 0;    
-        border-top: 1px solid grey;
-        width: 100%;
-    `
 
     return (
         <ScreenOverlay setIsActive={setIsSideBarOpen} isActive={isSideBarOpen}>

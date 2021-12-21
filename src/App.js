@@ -1,39 +1,72 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import BoxContent from './Components/BoxContent';
 import Header from './Components/Header';
 import PlusSign from './Components/PlusSign';
 import ScreenOverlay from './Components/ScreenOverlay';
 import Sidebar from './Components/Sidebar';
 import Loading from './Components/Loading';
+import ObservablePasswordStore from './PasswordStores'
+import { observer } from 'mobx-react-lite';
 
-const App = () => {
+const App = observer(({ store, ...props }) => {
+  const passwordStore = new ObservablePasswordStore();
+
+  useEffect(() => {
+
+    return () => {
+
+    }
+  }, [])
+
   const [isSideBarOpen, setIsSideBarOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [user, setUser] = useState("")
+  const [pass, setPass] = useState("")
 
-  const data = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  const addPassword = () => {
+    passwordStore.addPassword(Math.random(), 'site', 'note', store.user.username, 'title')
+  }
+
+  const handleOnlogin = () => {
+    store.login(user, pass)
+    alert(store.user.message)
+  }
+
   return (
     <>
-      {/* HEADER SECTION */}
-      <Header setIsSideBarOpen={setIsSideBarOpen} isSideBarOpen={isSideBarOpen} />
+      {!store.user.isLoggedIn ? <div>
+        <form onSubmit={e => { e.preventDefault(); handleOnlogin() }}>
+          <span>user :</span>
+          <input type="text" onChange={e => setUser(e.target.value)} name="user" /> <br />
+          <span>pass :</span>
+          <input type="password" name="pass" onChange={e => setPass(e.target.value)} /> <br />
+          <button type="submit">Submit</button>
+        </form>
+      </div> :
 
-      {/* CONTAINER */}
-      <div className="pt-16 pr-4 pl-4">
+        <>
+          {/* HEADER SECTION */}
+          <Header setIsSideBarOpen={setIsSideBarOpen} isSideBarOpen={isSideBarOpen} />
 
-        {/* BODY SECTION */}
-        <BoxContent data={data} />
-      </div>
+          {/* CONTAINER */}
+          <div className="pt-16 pr-4 pl-4">
 
-      {/* PLUS SIGN */}
-      <PlusSign />
+            {/* BODY SECTION */}
+            <BoxContent store={passwordStore} />
+          </div>
 
-      {/* SIDEBAR */}
-      <Sidebar setIsSideBarOpen={setIsSideBarOpen} isSideBarOpen={isSideBarOpen} />
+          {/* PLUS SIGN */}
+          <PlusSign onClick={addPassword} />
 
-      {/* LOADING */}
-      <Loading isLoading={isLoading} />
+          {/* SIDEBAR */}
+          <Sidebar setIsSideBarOpen={setIsSideBarOpen} isSideBarOpen={isSideBarOpen} />
+
+          {/* LOADING */}
+          <Loading isLoading={isLoading} />
+        </>}
 
     </>
   )
-}
+})
 
 export default App
