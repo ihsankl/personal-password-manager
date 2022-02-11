@@ -1,70 +1,19 @@
-import React, {} from 'react';
+import React from 'react';
 import '../styles/globals.css';
-import {ThemeProvider, createTheme} from '@mui/material/styles';
-import defaultTheme from '../theme/appTheme';
-import Head from 'next/head';
-import CssBaseline from '@mui/material/CssBaseline';
-import {AppProps} from 'next/app';
+import type {AppProps} from 'next/app';
+import '@fontsource/poppins/300.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/700.css';
+import {ThemeProvider} from '@mui/material/styles';
+import defaultTheme from '../theme/theme';
 
-// const theme = createTheme({
-//   ...themeOptions,
-// });
-
-// const MyApp =({Component, pageProps}: AppProps) => {
-//   return (
-//     <ThemeProvider theme={theme}>
-//       <Component {...pageProps} />
-//     </ThemeProvider>
-//   );
-// };
-
-// export default MyApp;
-
-const theme = createTheme({
-  ...defaultTheme,
-});
-
-const MyApp = (props: AppProps) => {
-  const {Component, pageProps} = props;
-
+const MyApp = ({Component, pageProps}: AppProps) => {
   return (
-    <React.Fragment>
-      <Head>
-        <title>My page</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
-      </Head>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </React.Fragment>
+    <ThemeProvider theme={defaultTheme}>
+      <Component {...pageProps} />
+    </ThemeProvider>
   );
 };
 
 export default MyApp;
-
-
-// import withRedux from 'next-redux-wrapper'
-// import { Provider } from 'react-redux'
-// import { withRouter } from 'next/router'
-// import App from 'next/app'
-
-// import createStore from 'store/createStore'
-
-// class MyApp extends App {
-//   render () {
-//     const { Component, pageProps, router, store } = this.props
-//     return (
-//           <Provider store={store}>
-//               <Component router={router} {...pageProps} />
-//           </Provider>
-//     )
-//   }
-// }
-
-// export default withRedux(createStore)(
-//   withRouter(MyApp)
-// )
