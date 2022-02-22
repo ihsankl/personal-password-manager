@@ -1,5 +1,7 @@
+import React from 'react';
 import {styled} from '@mui/material/styles';
 import {Paper} from '@mui/material';
+import {motion} from 'framer-motion';
 
 export const GradientBg = styled(Paper)`
   min-height: 100vh;
@@ -14,3 +16,14 @@ export const GradientBg = styled(Paper)`
     rgba(228,244,245,1) 100%
   );
 `;
+
+const AnimatedComponent = React.forwardRef(
+    (props: any, ref:any) => {
+    // eslint-disable-next-line react/prop-types
+      const Component = props.children;
+      return {...Component, ref};
+    });
+
+export const Animated = motion(AnimatedComponent);
+
+AnimatedComponent.displayName = 'AnimatedComponent';

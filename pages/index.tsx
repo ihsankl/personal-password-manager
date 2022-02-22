@@ -1,29 +1,13 @@
 import {NextPage} from 'next';
-import React, {
-  forwardRef,
-} from 'react';
-import {
-  motion,
-} from 'framer-motion';
+import React, {} from 'react';
 // material-ui
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import GoogleIcon from '@mui/icons-material/Google';
 import LockIcon from '@mui/icons-material/Lock';
-import {GradientBg} from '../theme/layout';
+import {Animated, GradientBg} from '../theme/layout';
 import {useTheme} from '@mui/material';
-
-const AnimatedComponent = forwardRef(
-    (props: any, ref:any) => {
-      // eslint-disable-next-line react/prop-types
-      const Component = props.children;
-      return {...Component, ref};
-    });
-
-const Animated = motion(AnimatedComponent);
-
-AnimatedComponent.displayName = 'AnimatedComponent';
 
 const Home: NextPage = () => {
   const theme = useTheme();

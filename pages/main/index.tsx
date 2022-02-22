@@ -1,15 +1,73 @@
-import {Box, IconButton, Stack, useTheme} from '@mui/material';
+import {
+  alpha,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Fab,
+  IconButton,
+  Stack,
+  Typography,
+  useTheme,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import React from 'react';
+import {
+  Add as AddIcon,
+  ChevronRight as ChevronRightIcon,
+  KeyboardArrowDown as KeyboardArrowDownIcon,
+  Search as SearchIcon,
+  Tune as TuneIcon,
+} from '@mui/icons-material';
+
+interface Data {
+    id: string;
+    username: string;
+    description: string;
+    image: string;
+    password: string;
+    title: string;
+}
+
+const defaultData:Data[] = [
+  {
+    id: '1',
+    username: 'ihsanklkl',
+    description: 'lorem ipsum dolor sit amet',
+    image: 'https://source.unsplash.com/random',
+    password: '*******',
+    title: 'Twitter',
+  },
+  {
+    id: '2',
+    username: 'ihsanklkl',
+    description: 'lorem ipsum dolor sit amet',
+    image: 'https://source.unsplash.com/random',
+    password: '*******',
+    title: 'Twitter',
+  },
+  {
+    id: '3',
+    username: 'ihsanklkl',
+    description: 'lorem ipsum dolor sit amet',
+    image: 'https://source.unsplash.com/random',
+    password: '*******',
+    title: 'Twitter',
+  },
+];
 
 const index = () => {
+  const [data, setData] = React.useState(defaultData as Data[]);
+  const [isExpand, setIsExpand] = React.useState(false);
   const theme = useTheme();
   return (
-    <Stack direction='row' flex={1}>
-      <Stack
+    <>
+      <Box
+        zIndex={1}
         p='.5em'
         height='100%'
         position='fixed'
+        minWidth='40px'
         sx={{
           background: `linear-gradient(
             37deg, 
@@ -19,14 +77,110 @@ const index = () => {
           )`,
         }}
       >
-        <IconButton aria-label='menu'>
-          <MenuIcon fill={theme.palette.primary.contrastText} />
-        </IconButton>
-      </Stack>
-      <Box position='absolute' left='3.5em' flex={1} bgcolor='violet'>
-          a
+        <Stack gap='.5em'>
+          <IconButton aria-label='menu'>
+            <MenuIcon color='action' />
+          </IconButton>
+          <IconButton aria-label='search'>
+            <SearchIcon color='action' />
+          </IconButton>
+        </Stack>
       </Box>
-    </Stack>
+      <Stack sx={{marginLeft: 'calc(40px + 1em)'}}>
+        <Stack
+          boxSizing='border-box'
+          py='1em'
+        >
+          <Stack
+            direction='row'
+            gap='.5em'
+          >
+            <Button variant='text'>
+              {`All`}
+            </Button>
+            <Button variant='text'>
+              {`Recents`}
+            </Button>
+            <Box flex={1} />
+            <IconButton
+              aria-label='filter'
+            >
+              <TuneIcon color='action' />
+            </IconButton>
+          </Stack>
+          <Stack
+            gap='1em'
+            px='.5em'
+          >
+            {data.map((value, index) => {
+              return (
+                <Card
+                  key={index}
+                  sx={{
+                    maxWidth: '350px',
+                    minWidth: '250px',
+                    width: '100%',
+                    background: alpha(theme.palette.primary.light, 0.1),
+                  }}
+                >
+                  <CardContent>
+                    <Stack direction='row' alignItems='center'>
+                      <Stack>
+                        <Box bgcolor='red' maxWidth={80}>
+                          {`lorem`}
+                        </Box>
+                        <Box bgcolor='violet' maxWidth={80}>
+                          {`a`}
+                        </Box>
+                      </Stack>
+                      <Stack flex={1} gap='.5em'>
+                        <Typography variant='h6'>
+                          {`${value.title}`}
+                        </Typography>
+                        <Typography variant='h6' fontSize={14}>
+                          {`${value.username}`}
+                        </Typography>
+                        {isExpand && (
+                          <Button
+                            variant='outlined'
+                            size='small'
+                          >
+                          Open Site
+                          </Button>
+                        )}
+                      </Stack>
+                      <IconButton
+                        onClick={()=> setIsExpand(!isExpand)}
+                        aria-label='expand'
+                      >
+                        {!isExpand ? (
+                          <ChevronRightIcon color='action' />
+                        ) : (
+                          <KeyboardArrowDownIcon color='action' />
+                        )}
+                      </IconButton>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </Stack>
+        </Stack>
+        <Fab
+          size="medium"
+          color="secondary"
+          aria-label="add"
+          sx={{
+            position: 'fixed',
+            bottom: '1.5em',
+            right: '1em',
+            zIndex: 1,
+          }}
+        >
+          <AddIcon />
+        </Fab>
+      </Stack>
+    </>
   );
 };
 
