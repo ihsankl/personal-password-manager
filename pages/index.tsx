@@ -1,13 +1,13 @@
-import {NextPage} from 'next';
-import React, {} from 'react';
+import { NextPage } from 'next';
+import React, { } from 'react';
 // material-ui
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import GoogleIcon from '@mui/icons-material/Google';
 import LockIcon from '@mui/icons-material/Lock';
-import {Animated, GradientBg} from '../theme/layout';
-import {useTheme} from '@mui/material';
+import { Animated, GradientBg } from '../theme/layout';
+import { useTheme } from '@mui/material';
 
 const Home: NextPage = () => {
   const theme = useTheme();
@@ -43,7 +43,7 @@ const Home: NextPage = () => {
                 justifyContent: 'center',
               }}
             >
-              <LockIcon sx={{fill: 'white', height: '32px', width: '32px'}} />
+              <LockIcon sx={{ fill: 'white', height: '32px', width: '32px' }} />
             </Stack>
           </Animated>
           <Stack>
@@ -124,7 +124,7 @@ const Home: NextPage = () => {
             mb: '1em',
           }}
         >
-            Google
+          Google
         </Button>
       </Stack>
     </GradientBg>

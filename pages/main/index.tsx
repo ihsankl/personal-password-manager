@@ -15,21 +15,23 @@ import React from 'react';
 import {
   Add as AddIcon,
   ChevronRight as ChevronRightIcon,
+  // eslint-disable-next-line no-unused-vars
   KeyboardArrowDown as KeyboardArrowDownIcon,
   Search as SearchIcon,
   Tune as TuneIcon,
 } from '@mui/icons-material';
-
+import { Animated } from '../../theme/layout';
+import { AnimatePresence } from 'framer-motion';
 interface Data {
-    id: string;
-    username: string;
-    description: string;
-    image: string;
-    password: string;
-    title: string;
+  id: string;
+  username: string;
+  description: string;
+  image: string;
+  password: string;
+  title: string;
 }
 
-const defaultData:Data[] = [
+const defaultData: Data[] = [
   {
     id: '1',
     username: 'ihsanklkl',
@@ -57,7 +59,8 @@ const defaultData:Data[] = [
 ];
 
 const index = () => {
-  const [data, setData] = React.useState(defaultData as Data[]);
+  // eslint-disable-next-line no-unused-vars
+  const [data, setData] = React.useState(defaultData);
   const [isExpand, setIsExpand] = React.useState(false);
   const theme = useTheme();
   return (
@@ -86,7 +89,7 @@ const index = () => {
           </IconButton>
         </Stack>
       </Box>
-      <Stack sx={{marginLeft: 'calc(40px + 1em)'}}>
+      <Stack sx={{ marginLeft: 'calc(40px + 1em)' }}>
         <Stack
           boxSizing='border-box'
           py='1em'
@@ -123,44 +126,71 @@ const index = () => {
                     background: alpha(theme.palette.primary.light, 0.1),
                   }}
                 >
-                  <CardContent>
-                    <Stack direction='row' alignItems='center'>
-                      <Stack>
-                        <Box bgcolor='red' maxWidth={80}>
-                          {`lorem`}
-                        </Box>
-                        <Box bgcolor='violet' maxWidth={80}>
-                          {`a`}
-                        </Box>
-                      </Stack>
-                      <Stack flex={1} gap='.5em'>
-                        <Typography variant='h6'>
-                          {`${value.title}`}
-                        </Typography>
-                        <Typography variant='h6' fontSize={14}>
-                          {`${value.username}`}
-                        </Typography>
-                        {isExpand && (
-                          <Button
-                            variant='outlined'
-                            size='small'
+                  <Animated
+                    animate={{
+                      // the height is 'Open Site' button
+                      // minus the height of the 'CardContent'
+                      height: isExpand ? '145px' : '105px',
+                    }}
+                  >
+                    <CardContent>
+                      <Stack direction='row' alignItems='center'>
+                        <Stack>
+                          <Box bgcolor='red' maxWidth={80}>
+                            {`lorem`}
+                          </Box>
+                          <Box bgcolor='violet' maxWidth={80}>
+                            {`a`}
+                          </Box>
+                        </Stack>
+                        <Stack flex={1} gap='.5em'>
+                          <Typography variant='h6'>
+                            {`${value.title}`}
+                          </Typography>
+                          <Typography variant='h6' fontSize={14}>
+                            {`${value.username}`}
+                          </Typography>
+                          <AnimatePresence>
+                            {isExpand &&
+                              <Animated
+                                initial={{
+                                  opacity: 0,
+                                  translateY: '-1em',
+                                }}
+                                animate={{
+                                  opacity: 1,
+                                  translateY: 0,
+                                }}
+                                exit={{
+                                  opacity: 0,
+                                  translateY: '-1em',
+                                }}
+                              >
+                                <Button
+                                  variant='outlined'
+                                  size='small'
+                                >
+                                  Open Site
+                                </Button>
+                              </Animated>
+                            }
+                          </AnimatePresence>
+                        </Stack>
+                        <IconButton
+                          onClick={() => setIsExpand(!isExpand)}
+                          aria-label='expand'
+                        >
+                          <Animated
+                            animate={{
+                              rotate: isExpand ? '90deg' : '0deg',
+                            }}
                           >
-                          Open Site
-                          </Button>
-                        )}
+                            <ChevronRightIcon color='action' />
+                          </Animated>
+                        </IconButton>
                       </Stack>
-                      <IconButton
-                        onClick={()=> setIsExpand(!isExpand)}
-                        aria-label='expand'
-                      >
-                        {!isExpand ? (
-                          <ChevronRightIcon color='action' />
-                        ) : (
-                          <KeyboardArrowDownIcon color='action' />
-                        )}
-                      </IconButton>
-                    </Stack>
-                  </CardContent>
+                    </CardContent>
+                  </Animated>
                 </Card>
               );
             })}

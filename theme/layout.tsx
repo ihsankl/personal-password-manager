@@ -1,7 +1,7 @@
-import React from 'react';
-import {styled} from '@mui/material/styles';
-import {Paper} from '@mui/material';
-import {motion} from 'framer-motion';
+import React, { Ref } from 'react';
+import { styled } from '@mui/material/styles';
+import { Paper } from '@mui/material';
+import { motion } from 'framer-motion';
 
 export const GradientBg = styled(Paper)`
   min-height: 100vh;
@@ -17,12 +17,16 @@ export const GradientBg = styled(Paper)`
   );
 `;
 
-const AnimatedComponent = React.forwardRef(
-    (props: any, ref:any) => {
-    // eslint-disable-next-line react/prop-types
-      const Component = props.children;
-      return {...Component, ref};
-    });
+type ForwardRefProps = {
+  children: React.ReactNode;
+}
+
+type ForwardRefRef = HTMLDivElement;
+
+const AnimatedComponent = React.forwardRef<ForwardRefRef, ForwardRefProps>(
+  (props, ref) => {
+    return <div ref={ref}>{props.children}</div>
+  });
 
 export const Animated = motion(AnimatedComponent);
 

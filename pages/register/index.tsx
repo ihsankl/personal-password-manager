@@ -10,7 +10,7 @@ import {useTheme} from '@mui/system';
 import React, {FC} from 'react';
 import {GradientBg} from '../../theme/layout';
 
-const index:FC = () => {
+const index: FC = () => {
   // eslint-disable-next-line no-unused-vars
   const theme = useTheme();
   return (
@@ -88,7 +88,7 @@ const index:FC = () => {
           </FormControl>
           <FormControl>
             <Button type='submit' variant='contained'>
-                Register
+              Register
             </Button>
           </FormControl>
         </Stack>
